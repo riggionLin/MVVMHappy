@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout >
+
+    <data>
+
+        <import type="com.yn.module_user.ui.login.MainViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.yn.module_user.ui.login.MainViewModel" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:binding="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <Button
+            binding:onClickCommand="@{viewModel.test}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MVVMHabit框架介绍" />
+
+
+    </LinearLayout>
+</layout>

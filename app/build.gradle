@@ -1,0 +1,82 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    signingConfigs {
+        debug {
+            keyAlias 'stock'
+            keyPassword '123456'
+            storeFile file("./keystore/stock.jks")
+            storePassword '123456'
+        }
+        release {
+            keyAlias 'stock'
+            keyPassword '123456'
+            storeFile file("./keystore/stock.jks")
+            storePassword '123456'
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.yn.stocknew"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled true
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+            minifyEnabled true
+            // Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            // 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.support["appcompat-v7"]
+    api rootProject.ext.support["design"]
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    if (isNeedHomeModule.toBoolean()) {
+    api project(':module_home')
+      }
+     if (isNeedMarketModule.toBoolean()) {
+    api project(':module_market')
+      }
+     if (isNeedOptionModule.toBoolean()) {
+    api project(':module_option')
+      }
+    if (isNeedUserModule.toBoolean()) {
+    api project(':module_user')
+     }
+
+}

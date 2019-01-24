@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">StockNew</string>
+    <array name="tab_main">
+        <item>首页</item>
+        <item>微聊</item>
+        <item>推荐</item>
+        <item>我的</item>
+    </array>
+</resources>

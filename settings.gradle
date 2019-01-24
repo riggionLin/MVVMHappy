@@ -1,0 +1,1 @@
+include ':app',':lib_base', ':module_home', ':module_market', ':module_option', ':module_user'
